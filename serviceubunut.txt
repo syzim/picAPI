@@ -1,0 +1,14 @@
+[Unit]
+Description=USA pic api
+
+[Service]
+WorkingDirectory=/home/ubuntu/picAPI
+ExecStart=/usr/bin/dotnet home/ubuntu/picAPI/PicAPI.dll
+Restart=always
+RestartSec=10  # Restart service after 10 seconds if dotnet service crashes
+SyslogIdentifier=pic-api
+User=www-data
+Environment=ASPNETCORE_ENVIRONMENT=Production 
+
+[Install]
+WantedBy=multi-user.target
