@@ -20,10 +20,7 @@ namespace PicAPI.Controllers
 
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "Its", "Working" };
-        }
+       
 
         // GET api/values/5
         [HttpGet("{swlat}/{swlong}/{nelat}/{nelong}")]
@@ -39,22 +36,6 @@ namespace PicAPI.Controllers
 
              return Ok(b.ToList());
         }
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+       
     }
 }
