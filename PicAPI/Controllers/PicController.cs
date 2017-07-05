@@ -29,7 +29,7 @@ namespace PicAPI.Controllers
                        p.lng > swlong &&
                        p.lat < nelat &&
                        p.lng < nelong
-                       select p;
+                       select new { p.id, p.urlt, p.urll, p.urls, p.lat, p.lng };
 
             if (b.Count() == 0)
             {
