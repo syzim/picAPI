@@ -31,10 +31,7 @@ namespace PicAPI.Controllers
                        p.lng < nelong
                        select new { p.id, p.urlt, p.urll, p.urls, p.lat, p.lng };
 
-            if (b.Count() == 0)
-            {
-                return NotFound(new { message = "no data at this region" });
-            }
+ 
 
              return Ok(b.ToList());
         }
