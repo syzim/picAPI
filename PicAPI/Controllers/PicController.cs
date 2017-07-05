@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
+using System.Net;
+using System.Net.Http;
 
 namespace PicAPI.Controllers
 {
@@ -18,24 +15,40 @@ namespace PicAPI.Controllers
             _db = db;
         }
 
-        // GET api/values
-        [HttpGet]
-       
-
-        // GET api/values/5
         [HttpGet("{swlat}/{swlong}/{nelat}/{nelong}")]
         public ActionResult Get(double swlat, double swlong, double nelat, double nelong)
         {
-          
-         var b = from p in _db.MetaImages
+
+            if(invalid(swlat) || invalid(swlong) || invalid(nelat) || invalid(nelong)){
+                return BadRequest(new { message = "please provide all valid GPS co-ordinates" });
+            }
+
+
+            var b = from p in _db.MetaImages
                  where p.lat > swlat &&
                        p.lng > swlong &&
                        p.lat < nelat &&
                        p.lng < nelong
                        select p;
 
+            if (b.Count() == 0)
+            {
+                return NotFound(new { message = "no data at this region" });
+            }
+
              return Ok(b.ToList());
         }
+
+        private bool invalid(double x)
+        {
+            if (x == 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        
        
     }
 }
